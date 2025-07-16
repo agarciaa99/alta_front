@@ -75,8 +75,11 @@ export default function FormCompleto() {
       description: "El contrato se esta generando...",
     });
 
+    const BACKEND_URL =
+      import.meta.env.PUBLIC_BACKEND_URL || "http://localhost:3001";
+
     try {
-      const response = await fetch("http://localhost:3001/generar-contrato", {
+      const response = await fetch(`${BACKEND_URL}/generar-contrato`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
