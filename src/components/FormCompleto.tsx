@@ -13,6 +13,9 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 export default function FormCompleto() {
+  const BACKEND_URL =
+    import.meta.env.PUBLIC_BACKEND_URL || "http://localhost:3001";
+
   const form = useForm<FullSchema>({
     resolver: zodResolver(fullSchema),
     defaultValues: {
@@ -40,6 +43,7 @@ export default function FormCompleto() {
   });
 
   const onSubmit = async (data: FullSchema) => {
+    console.log("Backend URL:", import.meta.env.PUBLIC_BACKEND_URL);
     const datosFormateados = {
       nombre: data.nombre.toUpperCase(),
       apellidoPaterno: data.apellidoPaterno.toUpperCase(),
@@ -74,9 +78,6 @@ export default function FormCompleto() {
     toast("Generando contrato...", {
       description: "El contrato se esta generando...",
     });
-
-    const BACKEND_URL =
-      import.meta.env.PUBLIC_BACKEND_URL || "http://localhost:3001";
 
     try {
       const response = await fetch(`${BACKEND_URL}/generar-contrato`, {
