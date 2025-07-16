@@ -14,7 +14,8 @@ import { es } from "date-fns/locale";
 
 export default function FormCompleto() {
   const BACKEND_URL =
-    import.meta.env.PUBLIC_BACKEND_URL || "http://localhost:3001";
+    import.meta.env.PUBLIC_BACKEND_URL?.replace(/\/$/, "") ||
+    "http://localhost:3001";
 
   const form = useForm<FullSchema>({
     resolver: zodResolver(fullSchema),
